@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    html{
+      height: 100vh;
+      margin:0;
+      padding:0;
+    }
+    body {
+
+      background-image: url('pattern.jpg');
+      background-size:cover;
+      background-position:center;
+      background-repeat: no-repeat;
+    }
+    .calculator {
+      width: 280px;
+      border: 2px solid  rgba(1, 44, 26, 0.322);
+      border-radius: 5px;
+      box-shadow: 10px 10px 0px rgba(1, 44, 26, 0.322);
+      margin: 50px auto;
+      padding: 15px;
+      background-color:darkslateblue;
+    }
+    input[type="text"] {
+      width: 97%;
+      height: 40px;
+      text-align: right;
+      margin-bottom: 5px;
+      font-size: 18px;
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      padding: 3px;
+      border: none;
+      border-radius: 5px;
+      background-color:rgba(27, 107, 27, 0.616);
+      color:lavender;
+    }
+    .btns-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 5px;
+    }
+    .btns-container button {
+      width: 100%;
+      height: 50px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color:lavenderblush;
+      color:darkslateblue;
+      box-shadow: 2px 2px 2px rgba(1, 44, 26, 0.322);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    .btns-container button:hover {
+      background-color: lavender;
+    }
+    .btns-container button:active {
+      background-color: slateblue;
+    }
+  </style>
+  <script type="text/javascript">
+    function factorial() {
+      var input = document.getElementById("result").value;
+      var n = parseInt(input);
+      
+      if (!isNaN(n)) {
+        if (Number.isInteger(n) && n >= 0) {
+          document.getElementById("result").value = calculateFactorial(n);
+        } else {
+          document.getElementById("result").value = "Error"
+        } 
+      } else {
+        document.getElementById("result").value = "Error"
+      }
+    }
+    function calculateFactorial(n) {
+      if (n == 0) {
+        return 1;
+      } else {
+        return n * calculateFactorial(n-1);
+      }
+    }
+    function del() {
+      var input = document.getElementById("result").value;
+      document.getElementById("result").value = input.slice(0,-1)
+    }
+    function clearInput() {
+      document.getElementById("result").value = "";
+    }
+    function appendInput(value) {
+      document.getElementById("result").value += value;
+    }
+    function calculate() {
+      var input = document.getElementById("result").value;
+      try {
+        var result = eval(input);
+        document.getElementById("result").value = result;
+      } catch (error) {
+        document.getElementById("result").value = "Error";
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" readonly>
+    <div class="btns-container">
+      <button onclick="clearInput()">C</button>
+      <button onclick="factorial()">n!</button>
+      <button onclick ="del()">DEL</button>
+      <button onclick="appendInput('/')">/</button>
+      <button onclick="appendInput('7')">7</button>
+      <button onclick="appendInput('8')">8</button>
+      <button onclick="appendInput('9')">9</button>
+      <button onclick="appendInput('*')">*</button>
+      <button onclick="appendInput('4')">4</button>
+      <button onclick="appendInput('5')">5</button>
+      <button onclick="appendInput('6')">6</button>
+      <button onclick="appendInput('-')">-</button>
+      <button onclick="appendInput('1')">1</button>
+      <button onclick="appendInput('2')">2</button>
+      <button onclick="appendInput('3')">3</button>
+      <button onclick="appendInput('+')">+</button>
+      <button onclick="appendInput('.')">.</button>
+      <button onclick="appendInput('0')">0</button>
+      <button onclick="calculate()">=</button>
+    </div>
+  </div>
+</body>
+</html>
